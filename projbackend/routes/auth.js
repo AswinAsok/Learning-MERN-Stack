@@ -1,9 +1,7 @@
 var express = require('express')
 var router = express.Router()
+const{signout} = require("../controllers/auth")
 
-router.get("/signout", (req,res)=>{
-    res.send("User Signout")
-})
-
+router.get("/signout", signout);
 
 module.exports = router;
