@@ -84,7 +84,23 @@ exports.isSignedIn = expressJwt({
 });
 
 
+//Custom Middlewares
 
+exports.isAuthenticated = (req,res,next) => {
+  let checker = req.profile && req.auth && req.profile._id === req.auth._id
+  if(!checker){
+    return res.staus(403).json({
+      error: "ACCESS DENIED"
+    })
+  }
+  next();
+}
 
-
-///Custom Middlewares
+exports.isAdmin = (req,res,next) => {
+  if(req.profile.role === 0){
+    res.status(403).json({
+      error: "You are not a ADMIN hence the access is denied to prevent hackers"
+    })
+  }
+  next();
+}
