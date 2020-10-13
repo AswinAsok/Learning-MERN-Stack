@@ -16,7 +16,7 @@ exports.signup = (req, res) => {
   user.save((err, user) => {
     if (err) {
       return res.status(400).json({
-        err: "NOT able to user in DB",
+        err: "NOT able to store user in DB",
       });
     }
     res.json({
@@ -37,7 +37,7 @@ exports.signin = (req, res) => {
     });
   }
 
-  User.findOne({ email }, (err, user) => {
+  User.findOne({email}, (err, user) => {
     if (err || !user) {
       return res.status(400).json({
         error: "User Email doesn't exists",
