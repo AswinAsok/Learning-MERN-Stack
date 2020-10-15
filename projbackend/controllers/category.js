@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const Cateogry = require("../models/category");
 
 exports.getCategoryById = (req, res, next, id) => {
@@ -31,7 +32,6 @@ exports.getCategory = (req, res) => {
 };
 
 exports.getAllCategory = (req, res) => {
-  //
   Cateogry.find().exec((err, categories) => {
     if (err) {
       return res.status(400).json({
@@ -39,5 +39,19 @@ exports.getAllCategory = (req, res) => {
       });
     }
     res.json(categories);
+  });
+};
+
+exports.updateCategory = (req, res) => {
+  const category = req.category;
+  category.name = req.body.name;
+
+  category.save((err, updatedCategory) => {
+    if (err) {
+      return res.status(400).json({
+        error: "Failed to update Category",
+      });
+    }
+    res.json(updatedCategory);
   });
 };
