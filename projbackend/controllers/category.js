@@ -1,5 +1,5 @@
 const { json } = require("body-parser");
-const Cateogry = require("../models/category");
+const Category = require("../models/category");
 
 exports.getCategoryById = (req, res, next, id) => {
   Cateogry.findById(id).exec((err, cate) => {
@@ -15,7 +15,7 @@ exports.getCategoryById = (req, res, next, id) => {
 };
 
 exports.createCategory = (req, res) => {
-  const category = new Cateogry(req.body);
+  const category =new Category(req.body)
   category.save((err, category) => {
     if (err) {
       return res.status(400).json({
