@@ -2,7 +2,7 @@ const { json } = require("body-parser");
 const Category = require("../models/category");
 
 exports.getCategoryById = (req, res, next, id) => {
-  Cateogry.findById(id).exec((err, cate) => {
+  Category.findById(id).exec((err, cate) => {
     if (err) {
       return res.status(400).json({
         error: "Category not found in DB",
@@ -66,7 +66,7 @@ exports.removeCategory = (req, res) => {
       });
     }
     res.json({
-      message: `Succesfully deleted ${category}`,
+      message: `Succesfully deleted ${category.name}`,
     });
   });
 };
