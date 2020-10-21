@@ -1,3 +1,4 @@
+const order = require("../models/order");
 const { Order, ProductCart } = require("../models/order");
 
 exports.getOrderById = (req, res, next, id) => {
@@ -13,3 +14,17 @@ exports.getOrderById = (req, res, next, id) => {
     next();
   });
 };
+
+
+exports.createOrder = (req, res) => {
+  req.body.order.user = re.profile
+  const irder = new Order(req.body.order)
+  order.save((err, order)=> {
+    if(err){
+      return res.status(400).json({
+        error: "Failed to store order in Db"
+      })
+    }
+    res.json(order)
+  })
+}
