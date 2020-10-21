@@ -150,38 +150,32 @@ exports.getAllProducts = (req, res) => {
     });
 };
 exports.getAllUniqueCategories = (req, res) => {
-  Product.distinct("category", {}, (err, category)=>{
-    if(err){
+  Product.distinct("category", {}, (err, category) => {
+    if (err) {
       return res.status(400).json({
-        error: "No Category found"
-      })
+        error: "No Category found",
+      });
     }
-    res.json(category)
-  })
-}
+    res.json(category);
+  });
+};
 
-
-exports.updateStock = (req,res, next) =>{
-
-  let myOperations = req.body.order.products.map( prod => {
+exports.updateStock = (req, res, next) => {
+  let myOperations = req.body.order.products.map((prod) => {
     return {
       updateOne: {
-        filter: {_id: prod._id},
-        update: {$inc: {stock: -prod.count, sold: +prod.count}}
-        
-      }
-    }
-  })
+        filter: { _id: prod._id },
+        update: { $inc: { stock: -prod.count, sold: +prod.count } },
+      },
+    };
+  });
 
-  Product.bulkWrite(myOperations, {}, (err, products)=>{
-    if(err){
-      return res.status(400).json(
-        {
-          error: "Bulk Operation failed"
-        }
-      )
+  Product.bulkWrite(myOperations, {}, (err, products) => {
+    if (err) {
+      return res.status(400).json({
+        error: "Bulk Operation failed",
+      });
     }
     next();
-  })
-
-}
+  });
+};
