@@ -1,16 +1,37 @@
-import React, {useState} from "react"
-import Base from "../core/Base"
-import Link from "react-router-dom"
+import React, { useState } from "react";
+import Base from "../core/Base";
+import Link from "react-router-dom";
 
 const Signup = () => {
-    return(
-        <Base title = "Signup Page" description="A page for user to sign up">
-        <h1>Signup Works</h1>
-        </Base>
-    )
-}
+  const signUpForm = () => {
+    return (
+      <div className="row">
+        <div className="col-md-6 offset-sm-3 text-left">
+          <form>
+            <div className="form-group">
+              <label className="text-light">Name</label>
+              <input className="form-control" type="text" />
+            </div>
+            <div className="form-group">
+              <label className="text-light">Email</label>
+              <input className="form-control" type="email" />
+            </div>
+            <div className="form-group">
+              <label className="text-light">Password</label>
+              <input className="form-control" type="password" />
+            </div>
+            <button className="bt btn-success btn-block">Sumbit</button>
+          </form>
+        </div>
+      </div>
+    );
+  };
 
+  return (
+    <Base title="Signup Page" description="A page for user to sign up">
+      {signUpForm()}
+    </Base>
+  );
+};
 
 export default Signup;
-
-
