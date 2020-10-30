@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Base from "../core/Base";
-import Link from "react-router-dom";
+import { Link } from "react-router-dom";
 import { signup } from "../auth/helper";
 
 const Signup = () => {
@@ -12,7 +12,7 @@ const Signup = () => {
     success: "",
   });
 
-  const { name, email, password, err, success } = values;
+  const { name, email, password, error, success } = values;
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, error: false, [name]: event.target.value });
@@ -40,6 +40,38 @@ const Signup = () => {
       .catch(console.log("Error in Signup form"));
   };
 
+  const successMessage = () => {
+    return (
+      <div className="row">
+        <div className="col-md-6 offset-sm-3 text-left">
+          <div
+            className="alert alert-success"
+            style={{ display: success ? "" : "none" }}
+          >
+            New Account was created Successfully. Please{" "}
+            <Link to="/signin">Login Here</Link>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const errorMessage = () => {
+    return (
+      <div className="row">
+        <div className="col-md-6 offset-sm-3 text-left">
+          <div
+            className="alert alert-danger"
+            style={{ display: error ? "" : "none" }}
+          >
+            {error}
+            <Link to="/signin">Login Here</Link>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const signUpForm = () => {
     return (
       <div className="row">
@@ -51,6 +83,7 @@ const Signup = () => {
                 className="form-control"
                 onChange={handleChange("name")}
                 type="text"
+                value={name}
               />
             </div>
             <div className="form-group">
@@ -59,6 +92,7 @@ const Signup = () => {
                 className="form-control"
                 onChange={handleChange("email")}
                 type="email"
+                value={email}
               />
             </div>
             <div className="form-group">
@@ -67,6 +101,7 @@ const Signup = () => {
                 className="form-control"
                 onChange={handleChange("password")}
                 type="password"
+                value={password}
               />
             </div>
             <button onClick={onSubmit} className="bt btn-success btn-block">
@@ -80,6 +115,8 @@ const Signup = () => {
 
   return (
     <Base title="Signup Page" description="A page for user to sign up">
+      {successMessage()}
+      {errorMessage()}
       {signUpForm()}
       <p className="text-white text-center">{JSON.stringify(values)}</p>
     </Base>
