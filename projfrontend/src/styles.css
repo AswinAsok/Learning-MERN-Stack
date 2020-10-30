@@ -2,6 +2,7 @@
 .jumbotron,
 .nav :hover {
   border-radius: 0px;
+  margin-bottom: auto;
 }
 
 body {
