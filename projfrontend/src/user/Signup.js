@@ -12,22 +12,26 @@ const Signup = () => {
     success: "",
   });
 
-  const { name, email, password, error, success } = values;
+  const { name, email, password, error, success } = values; //Desturcturing the values for the future use.
 
   const handleChange = (name) => (event) => {
-    setValues({ ...values, error: false, [name]: event.target.value });
+    setValues({
+      ...values,
+      error: false,
+      [name]: event.target.value,
+    }); /*Setting the state varible whenever a change has been made to the form fields */
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: false });
-    console.log(name, email, password);
-    signup({ name, email, password })
+    signup({ name, email, password }) //Sending values from the form to the auth helper to store in the Db
       .then((data) => {
         if (data.error) {
-          setValues({ ...values, error: data.error, success: false });
+          setValues({ ...values, error: data.error, success: false }); //If in case some error was encountered while saving in the Db.
         } else {
           setValues({
+            //If the data was saved successfully saved into the Db then clearing the success form.
             ...values,
             name: "",
             email: "",
@@ -46,9 +50,12 @@ const Signup = () => {
         <div className="col-md-6 offset-sm-3 text-left">
           <div
             className="alert alert-success"
-            style={{ display: success ? "" : "none" }}
+            style={{
+              display: success ? "" : "none",
+            }} /*If the user was saved in the Db the success would be true
+            as in setValues and if so display the message else the how div would be hidden*/
           >
-            New Account was created Successfully. Please{" "}
+            New Account was created Successfully. Please
             <Link to="/signin">Login Here</Link>
           </div>
         </div>
@@ -62,10 +69,11 @@ const Signup = () => {
         <div className="col-md-6 offset-sm-3 text-left">
           <div
             className="alert alert-danger"
-            style={{ display: error ? "" : "none" }}
+            style={{
+              display: error ? "" : "none",
+            }} /* If there is error displaying the error else hiding it*/
           >
             {error}
-            <Link to="/signin">Login Here</Link>
           </div>
         </div>
       </div>
@@ -124,3 +132,10 @@ const Signup = () => {
 };
 
 export default Signup;
+
+
+//onSubmit = Executes the function when the page is loading like default constructor.
+
+/*onSubmit() = Execute the function only when the the action when is tied to it is executed.
+If the onSubmit was given as onSubmit() it would automatically run at the loading of the page
+and would causes many error*/
