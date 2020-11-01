@@ -45,7 +45,8 @@ const Menu = ({ history }) => (
           A.Dashboard
         </Link>
       </li>
-      {!isAuthenticated() && (
+      {!isAuthenticated() && ( //If there is no jwt token in the browser shows these elements.
+        //I need to return two tag at the same time but can't use <div> as it interfere with design so Fragment is used.
         <Fragment>
           <li className="nav-item">
             <Link
@@ -67,7 +68,7 @@ const Menu = ({ history }) => (
           </li>
         </Fragment>
       )}
-      {isAuthenticated() && (
+      {isAuthenticated() && ( //If there is an jwt token then the user has to signout.Hence shows the option.
         <li className="nav-item">
           <span
             className="nav-link text-warning"

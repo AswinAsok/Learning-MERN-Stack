@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { signup } from "../auth/helper";
 
 const Signup = () => {
-  const [values, setValues] = useState({
+  const [values, setValues] = useState({ 
     name: "",
     email: "",
     password: "",

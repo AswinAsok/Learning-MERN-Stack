@@ -6,14 +6,15 @@ import { signin, authenticate, isAuthenticated } from "../auth/helper";
 
 const Signin = () => {
   const [values, setValues] = useState({
-    email: "aswinasok1245@gmail.com", //admin userId and password.
+    email:
+      "aswinasok1245@gmail.com" /*In the form the value attributes takes the values from here due to the due to the redirect*/,
     password: "9074750272",
     error: "",
     loading: false,
     didRedirect: false,
   });
 
-  const { email, password, error, loading, didRedirect } = values;
+  const { email, password, error, loading, didRedirect } = values; //Destructing the values.
 
   const { user } = isAuthenticated();
 
@@ -23,8 +24,11 @@ const Signin = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    setValues({ ...values, error: false, loading: true });
-    signin({ email, password })
+    /*The preventDefault() method cancels the event if it is cancelable,
+     meaning that the default action that belongs to the event will not occur.
+     Here if I am right the action is to redirect*/
+    setValues({ ...values, error: false, loading: true }); //If everything goes well sets values and sets error false
+    signin({ email, password }) //This is a function from the auth routes to store to db.
       .then((data) => {
         if (data.error) {
           setValues({ ...values, error: true, loading: false });
@@ -41,7 +45,7 @@ const Signin = () => {
   };
 
   const performRedirect = () => {
-    //TODO : DO a redirection here. 
+    //TODO : DO a redirection here.
 
     if (didRedirect) {
       if (user && user.role === 1) {
@@ -119,7 +123,7 @@ const Signin = () => {
       {errorMessage()}
       {signInForm()}
       {performRedirect()}
-      <p  className="text-white text-center">{JSON.stringify(values)}</p>
+      <p className="text-white text-center">{JSON.stringify(values)}</p>
     </Base>
   );
 };
