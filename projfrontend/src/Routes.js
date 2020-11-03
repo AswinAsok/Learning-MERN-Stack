@@ -8,6 +8,8 @@ import PrivateRoute from "./auth/helper/PrivateRoutes";
 import UserDashboard from "./user/UserDashBoard";
 import AdminDashboard from "./user/AdminDashBoard";
 import AddCategory from "./admin/AddCategory";
+import ManageCategories from "./admin/ManageCategories";
+import AddProduct from "./admin/AddProduct";
 
 function Routes() {
   return (
@@ -22,6 +24,16 @@ function Routes() {
           path="/admin/create/category"
           exact
           component={AddCategory}
+        />
+        <AdminRoute
+          path="/admin/categories"
+          exact
+          component={ManageCategories}
+        />
+        <AdminRoute
+          path="/admin/create/product"
+          exact
+          component={AddProduct}
         />
       </Switch>
     </BrowserRouter>

@@ -28,8 +28,7 @@ export const getCategories = () => {
 };
 
 //Product Calls
-
-export const createaProduct = (user, token, product) => {
+export const createaProduct = (userId, token, product) => {
   return fetch(`${API}/product/create/${userId}`, {
     method: "POST",
     headers: {
@@ -91,7 +90,7 @@ export const updateProduct = (productId, userId, token, product) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(category),
+    body: JSON.stringify(product),
   })
     .then((response) => {
       return response.json();
