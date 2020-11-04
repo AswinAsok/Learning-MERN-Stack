@@ -18,7 +18,12 @@ function Routes() {
         <Route path="/" exact component={Home} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
-        <PrivateRoute path="/user/dashboard" exact component={UserDashboard} />
+        <PrivateRoute
+          path="/user/dashboard"
+          exact
+          component={UserDashboard}
+        />{" "}
+        {/* Private Routes can be accessed by a non-admin user who is loggedIn */}
         <AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
         <AdminRoute
           path="/admin/create/category"
@@ -30,11 +35,8 @@ function Routes() {
           exact
           component={ManageCategories}
         />
-        <AdminRoute
-          path="/admin/create/product"
-          exact
-          component={AddProduct}
-        />
+        <AdminRoute path="/admin/create/product" exact component={AddProduct} />
+        {/*Can be accessed only the admin(i.e role == 1) user who is loggedIn */}
       </Switch>
     </BrowserRouter>
   );

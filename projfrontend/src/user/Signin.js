@@ -33,7 +33,7 @@ const Signin = () => {
         if (data.error) {
           setValues({ ...values, error: true, loading: false });
         } else {
-          authenticate(data, () => {
+          authenticate(data, () => { 
             setValues({
               ...values,
               didRedirect: true,
