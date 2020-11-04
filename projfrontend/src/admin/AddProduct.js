@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Base from "../core/Base";
-import { getCategories } from "./helper/adminapicall";
+import { createaProduct, getCategories } from "./helper/adminapicall";
 import { isAuthenticated } from "../auth/helper/index";
 
 const AddProduct = () => {
@@ -26,12 +26,44 @@ const AddProduct = () => {
     preload();
   }, []);
 
-  const onSubmit = (event) => {};
-  const handleChange = (name) => event => {
-    const value = name === "photo" ? event.target.file[0] : event.target.value;
+  const onSubmit = (event) => {
+    event.preventDefault();
+    setValues({...values, error: "", loading: true})
+    createaProduct(user._id, token, formData).then(data => {
+      if(data.error){
+        setValues({...values, error: data.error})
+        
+      }else{
+        setValues({
+          ...values,
+          name: "",
+          description: "",
+          price: "",
+          photo: "",
+          stock: "",
+          loading: false,
+          createdProduct: data.name
+        })
+      }
+    })
+  };
+
+  const handleChange = (name) => (event) => {
+    const value = name === "photo" ? event.target.files[0] : event.target.value;
     formData.set(name, value);
     setValues({ ...values, [name]: value });
   };
+
+  const successMessage =() => (
+    <div className="alert alert-sucess mt-3"
+    style={{display : createdProduct ? "" : "none"}}
+    >
+
+    <h4>{createdProduct} created Successfully</h4>
+    </div>
+  )
+
+  
 
   const {
     name,
@@ -116,7 +148,7 @@ const AddProduct = () => {
       </div>
       <div className="form-group">
         <input
-          onChange={handleChange("quantity")}
+          onChange={handleChange("stock")}
           type="number"
           className="form-control"
           placeholder="Quantity"
@@ -144,7 +176,10 @@ const AddProduct = () => {
         Admin Home
       </Link>
       <div className="row bg-dark text-white rounded">
-        <div className="col-md-8 offset-2">{createProductForm()}</div>
+        <div className="col-md-8 offset-2">
+          {successMessage()}
+          {createProductForm()}
+          </div>
       </div>
     </Base>
   );
