@@ -22,7 +22,7 @@ const ManageCategories = () => {
   const preload = () => {
     getCategories().then((data) => {
       if (data.error) {
-        setValues({ ...values, error: data.error });
+        setError(true);
       } else {
         setValues({ ...values, categories: data });
       }
@@ -32,7 +32,7 @@ const ManageCategories = () => {
   const successMessage = () => {
     if (success && categories.length != 0) {
       return (
-        <h4 className="text-success text-center mt-3">Category Deleted</h4>
+        <h4 className="text-success text-center mt-3">Category Deleted Successfully</h4>
       );
     }
   };

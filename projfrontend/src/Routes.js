@@ -10,6 +10,7 @@ import AdminDashboard from "./user/AdminDashBoard";
 import AddCategory from "./admin/AddCategory";
 import ManageCategories from "./admin/ManageCategories";
 import AddProduct from "./admin/AddProduct";
+import ManageProducts from "./admin/ManageProducts"
 
 function Routes() {
   return (
@@ -35,6 +36,7 @@ function Routes() {
           exact
           component={ManageCategories}
         />
+        <AdminRoute path="/admin/products" exact component={ManageProducts} />
         <AdminRoute path="/admin/create/product" exact component={AddProduct} />
         {/*Can be accessed only the admin(i.e role == 1) user who is loggedIn */}
       </Switch>
