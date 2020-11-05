@@ -28,12 +28,11 @@ const AddProduct = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    setValues({...values, error: "", loading: true})
-    createaProduct(user._id, token, formData).then(data => {
-      if(data.error){
-        setValues({...values, error: data.error})
-        
-      }else{
+    setValues({ ...values, error: "", loading: true });
+    createaProduct(user._id, token, formData).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
         setValues({
           ...values,
           name: "",
@@ -42,10 +41,10 @@ const AddProduct = () => {
           photo: "",
           stock: "",
           loading: false,
-          createdProduct: data.name
-        })
+          createdProduct: data.name,
+        });
       }
-    })
+    });
   };
 
   const handleChange = (name) => (event) => {
@@ -54,16 +53,14 @@ const AddProduct = () => {
     setValues({ ...values, [name]: value });
   };
 
-  const successMessage =() => (
-    <div className="alert alert-sucess mt-3"
-    style={{display : createdProduct ? "" : "none"}}
+  const successMessage = () => (
+    <div
+      className="alert alert-success mt-3"
+      style={{ display: createdProduct ? "" : "none" }}
     >
-
-    <h4>{createdProduct} created Successfully</h4>
+      <h4>{createdProduct} created Successfully</h4>
     </div>
-  )
-
-  
+  );
 
   const {
     name,
@@ -84,7 +81,7 @@ const AddProduct = () => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        setValues({ ...values, categories: data, formData: new FormData() });
+        setValues({ ...values, [categories]: data, formData: new FormData() });
         console.log("CATEGORIES", categories);
       }
     });
@@ -179,7 +176,7 @@ const AddProduct = () => {
         <div className="col-md-8 offset-2">
           {successMessage()}
           {createProductForm()}
-          </div>
+        </div>
       </div>
     </Base>
   );
