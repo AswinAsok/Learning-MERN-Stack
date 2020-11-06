@@ -12,6 +12,8 @@ import ManageCategories from "./admin/ManageCategories";
 import AddProduct from "./admin/AddProduct";
 import ManageProducts from "./admin/ManageProducts";
 import UpdateProduct from  "./admin/UpdateProduct"
+import UpdateCategory from "./admin/UpdateCategory";
+
 
 function Routes() {
   return (
@@ -43,6 +45,11 @@ function Routes() {
           path="/admin/product/update/:productId"
           exact
           component={UpdateProduct}
+        />
+        <AdminRoute
+          path="/admin/category/:categoryId"
+          exact
+          component={UpdateCategory}
         />
         {/*Can be accessed only the admin(i.e role == 1) user who is loggedIn */}
       </Switch>

@@ -32,7 +32,9 @@ const ManageCategories = () => {
   const successMessage = () => {
     if (success && categories.length != 0) {
       return (
-        <h4 className="text-success text-center mt-3">Category Deleted Successfully</h4>
+        <h4 className="text-success text-center mt-3">
+          Category Deleted Successfully
+        </h4>
       );
     }
   };
@@ -71,7 +73,10 @@ const ManageCategories = () => {
       <Link className="btn btn-md btn-success mb-3 mr-2" to="/admin/dashboard">
         Go Back
       </Link>
-      <Link className="btn btn-md btn-success mb-3 mr-2" to="/admin/create/category">
+      <Link
+        className="btn btn-md btn-success mb-3 mr-2"
+        to="/admin/create/category"
+      >
         Create Categories
       </Link>
     </div>
@@ -84,9 +89,12 @@ const ManageCategories = () => {
           <div className="card bg-dark col-3 border border-success m-auto offset-3">
             <h5 className="card-header mt-2 border-primary">{category.name}</h5>
             <div className="btn-group m-4">
-              <button className="btn btn-success btn-sm col-md-6 m-2">
-                Update Category
-              </button>
+              <Link
+                className="btn btn-success btn-sm col-md-6"
+                to={`/admin/category/${category._id}`}
+              >
+                <span className="">Update</span>
+              </Link>
               <button
                 type="submit"
                 onClick={() => removeaCategory(category._id)}
