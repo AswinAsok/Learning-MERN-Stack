@@ -27,6 +27,17 @@ export const getCategories = () => {
     .catch((err) => console.log(err));
 };
 
+export const getaCategory = (categoryId) => {
+  return fetch(`${API}/category/${categoryId}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      console.log(response);
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+
 export const deleteCategory = (categoryId, userId, token) => {
   return fetch(`${API}/category/${categoryId}/${userId}`, {
     method: "DELETE",

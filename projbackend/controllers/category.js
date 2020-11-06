@@ -9,9 +9,10 @@ exports.getCategoryById = (req, res, next, id) => {
       });
     }
     req.category = cate;
+    next();
   });
 
-  next();
+  
 };
 
 exports.createCategory = (req, res) => {
