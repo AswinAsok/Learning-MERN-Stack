@@ -45,8 +45,9 @@ exports.getAllCategory = (req, res) => {
 
 exports.updateCategory = (req, res) => {
   const category = req.category;
+  console.log("Req.Category",req.category.name)
+  console.log("Updated.Category",req.body.name)
   category.name = req.body.name;
-
   category.save((err, updatedCategory) => {
     if (err) {
       return res.status(400).json({

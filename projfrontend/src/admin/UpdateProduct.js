@@ -34,11 +34,12 @@ const UpdateProduct = ({ match }) => {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log("Button Clicked is Working");
+    console.log("This is the Form Data", formData.name);
     setValues({ ...values, error: "", loading: true });
     console.log(match.params.productId);
     updateProduct(match.params.productId, user._id, token, formData).then(
-      data => {
-        console.log(data)
+      (data) => {
+        console.log(data);
         if (data.error) {
           setValues({ ...values, error: data.error });
         } else {
@@ -72,7 +73,7 @@ const UpdateProduct = ({ match }) => {
   } = values;
 
   const preloadCategories = () => {
-    getCategories().then(data => {
+    getCategories().then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
@@ -84,7 +85,7 @@ const UpdateProduct = ({ match }) => {
     });
   };
 
-  const handleChange = name => event => {
+  const handleChange = (name) => (event) => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
     formData.set(name, value);
     setValues({ ...values, [name]: value });
@@ -99,10 +100,8 @@ const UpdateProduct = ({ match }) => {
     </div>
   );
 
-  
-
   const preload = (productId) => {
-    getProduct(productId).then(data => {
+    getProduct(productId).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
@@ -216,9 +215,3 @@ const UpdateProduct = ({ match }) => {
 };
 
 export default UpdateProduct;
-
-
-
-
-
-

@@ -27,12 +27,29 @@ export const getCategories = () => {
     .catch((err) => console.log(err));
 };
 
+//Gat a Category
 export const getaCategory = (categoryId) => {
   return fetch(`${API}/category/${categoryId}`, {
     method: "GET",
   })
     .then((response) => {
-      console.log(response);
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+
+//Update a Category
+export const updateaCategory = (categoryId, userId, token, category) => {
+  return fetch(`${API}/category/${categoryId}/${userId}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: category,
+  })
+    .then((response) => {
+      console.log(`Response Recieved From Backend${response}`);
       return response.json();
     })
     .catch((err) => console.log(err));
