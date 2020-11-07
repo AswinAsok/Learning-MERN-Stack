@@ -44,12 +44,12 @@ export const updateaCategory = (categoryId, userId, token, category) => {
     method: "PUT",
     headers: {
       Accept: "application/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     body: category,
   })
     .then((response) => {
-      console.log(`Response Recieved From Backend${response}`);
       return response.json();
     })
     .catch((err) => console.log(err));

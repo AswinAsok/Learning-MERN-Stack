@@ -11,8 +11,6 @@ exports.getCategoryById = (req, res, next, id) => {
     req.category = cate;
     next();
   });
-
-  
 };
 
 exports.createCategory = (req, res) => {
@@ -45,8 +43,6 @@ exports.getAllCategory = (req, res) => {
 
 exports.updateCategory = (req, res) => {
   const category = req.category;
-  console.log("Req.Category",req.category.name)
-  console.log("Updated.Category",req.body.name)
   category.name = req.body.name;
   category.save((err, updatedCategory) => {
     if (err) {

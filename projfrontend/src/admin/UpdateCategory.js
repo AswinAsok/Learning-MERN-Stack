@@ -40,8 +40,12 @@ const UpdateCategory = ({ match }) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log("This is the Form Data", formData.name);
-    updateaCategory(match.params.categoryId, user._id, token, formData).then(
+    var object = {};
+    formData.forEach(function (value, key) {
+      object[key] = value;
+    });
+    var UpdatedName = JSON.stringify(object);
+    updateaCategory(match.params.categoryId, user._id, token, UpdatedName).then(
       (data) => {
         console.log(data);
         if (data.error) {
