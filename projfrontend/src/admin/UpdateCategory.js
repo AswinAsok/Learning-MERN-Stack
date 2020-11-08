@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
 import { isAuthenticated } from "../auth/helper";
 import Base from "../core/Base";
 import { getaCategory, updateaCategory } from "./helper/adminapicall";
@@ -11,13 +12,14 @@ const UpdateCategory = ({ match }) => {
     error: "",
     formData: "",
     success: false,
+    didRedirect: false,
   });
 
   useEffect(() => {
     preload(match.params.categoryId);
   }, []);
 
-  const { name, error, formData, success } = values;
+  const { name, error, formData, success, didRedirect } = values;
 
   const handleChange = (name) => (event) => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
@@ -33,6 +35,7 @@ const UpdateCategory = ({ match }) => {
         setValues({
           name: data.name,
           formData: new FormData(),
+          didRedirect: false,
         });
       }
     });
@@ -47,7 +50,6 @@ const UpdateCategory = ({ match }) => {
     var UpdatedName = JSON.stringify(object);
     updateaCategory(match.params.categoryId, user._id, token, UpdatedName).then(
       (data) => {
-        console.log(data);
         if (data.error) {
           setValues({ ...values, error: data.error });
         } else {
@@ -55,11 +57,29 @@ const UpdateCategory = ({ match }) => {
             ...values,
             name: data.name,
             success: true,
+            didRedirect: true,
           });
         }
       }
     );
   };
+
+  const successMessage = () => (
+    <div
+      className="alert alert-success mt-2 offset-3 col-md-6"
+      style={{ display: success ? "" : "none" }}
+    >
+      <h4>Category Updated Successfully</h4>
+    </div>
+  );
+
+  const performRedirect = () => {
+    if (didRedirect) {
+      if (user && user.role === 1) {
+        return <Redirect to="/admin/categories"/>;
+    }
+  }
+};
 
   const updateCategoryForm = () => (
     <form>
@@ -84,11 +104,12 @@ const UpdateCategory = ({ match }) => {
   return (
     <div>
       <Base title="Update Categories" description="Update Your Category Name">
+        {successMessage()}
         {updateCategoryForm()}
-        <p className="text-white text-center">{`Match : ${match.params.categoryId}, Success: ${success}, Name : ${name}, Error : ${error}`}</p>
+        {performRedirect()}
       </Base>
     </div>
   );
 };
 
-export default UpdateCategory;
+export default UpdateCategory

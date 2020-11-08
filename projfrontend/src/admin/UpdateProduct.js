@@ -33,8 +33,6 @@ const UpdateProduct = ({ match }) => {
   //TODO : Work on it
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log("Button Clicked is Working");
-    console.log("This is the Form Data", formData.name);
     setValues({ ...values, error: "", loading: true });
     console.log(match.params.productId);
     updateProduct(match.params.productId, user._id, token, formData).then(

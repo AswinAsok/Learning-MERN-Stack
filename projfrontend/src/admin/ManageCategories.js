@@ -90,10 +90,10 @@ const ManageCategories = () => {
             <h5 className="card-header mt-2 border-primary">{category.name}</h5>
             <div className="btn-group m-4">
               <Link
-                className="btn btn-success btn-sm col-md-6"
+                className="btn btn-success btn-sm col-md-6 m-2"
                 to={`/admin/category/${category._id}`}
               >
-                <span className="">Update</span>
+                <span className="">Update Category</span>
               </Link>
               <button
                 type="submit"
