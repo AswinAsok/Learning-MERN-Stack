@@ -13,6 +13,7 @@ import AddProduct from "./admin/AddProduct";
 import ManageProducts from "./admin/ManageProducts";
 import UpdateProduct from  "./admin/UpdateProduct"
 import UpdateCategory from "./admin/UpdateCategory";
+import Cart from "./core/Cart";
 
 
 function Routes() {
@@ -22,6 +23,7 @@ function Routes() {
         <Route path="/" exact component={Home} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
+        <Route path="/cart" exact component={Cart} />
         <PrivateRoute
           path="/user/dashboard"
           exact
