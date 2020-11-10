@@ -24,9 +24,8 @@ function Home() {
   }, []);
 
   return (
-    <Base title="Home Page" description="Welcome to the T-Shirt Store">
+    <Base title="Home Page" description="Welcome to the Hilarious Store">
       <div className="row">
-        <h1 className="text-white">Lastest Products</h1>
         <div className="row m-auto offset-3">
           {products.map((product, index) => {
             return (
@@ -36,6 +35,17 @@ function Home() {
             );
           })}
         </div>
+      </div>
+      <div>
+        {getProducts.length === 0 ? (
+          <h3 className="text-center">
+            Due to Heavy Demand No Product Are Available Now
+            <br />
+            Check Out Later.
+          </h3>
+        ) : (
+          ""
+        )}
       </div>
     </Base>
   );

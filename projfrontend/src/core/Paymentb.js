@@ -34,7 +34,7 @@ const Paymentb = ({ products, setReload = (f) => f, reload = undefined }) => {
   const showbtdropIn = () => {
     return (
       <div>
-        {info.clientToken !== null && (
+        {info.clientToken !== null && products.length > 0 ? (
           <div>
             <DropIn
               options={{ authorization: info.clientToken }}
@@ -44,6 +44,8 @@ const Paymentb = ({ products, setReload = (f) => f, reload = undefined }) => {
               Buy
             </button>
           </div>
+        ) : (
+          <h3>Add Some Products</h3>
         )}
       </div>
     );
@@ -86,7 +88,8 @@ const Paymentb = ({ products, setReload = (f) => f, reload = undefined }) => {
 
   return (
     <div>
-      <h3>Your Bill is ${getAmount()}</h3>
+      {getAmount() !== 0 ? <h3>Your Bill is ${getAmount()}</h3> : ""}
+
       {showbtdropIn()}
     </div>
   );

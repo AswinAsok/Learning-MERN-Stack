@@ -59,7 +59,7 @@ const Card = ({
 
   return (
     <div className="card text-white bg-dark border border-info ">
-      <div className="card-header lead">A{cardTitle}</div>
+      <div className="card-header lead">{cardTitle}</div>
       <div className="card-body">
         {getARedirect(redirect)}
         <Imagehelper product={product} />

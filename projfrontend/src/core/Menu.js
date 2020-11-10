@@ -4,7 +4,7 @@ import { signout, isAuthenticated } from "../auth/helper";
 
 const currentTab = (history, path) => {
   if (history.location.pathname === path) {
-    return { color: "#26ae60" };
+    return { color: "007BFF" };
   } else {
     return { color: "#FFFFFF" };
   }
