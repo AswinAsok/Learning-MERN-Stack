@@ -6,21 +6,22 @@ import { createOrder } from "./helper/orderhelper";
 import { isAuthenticated } from "../auth/helper";
 import DropIn from "braintree-web-drop-in-react";
 
-const Paymentb = ({ product, setReload = (f) => f, reload = undefined }) => {
+const userId = isAuthenticated() && isAuthenticated().user._id;
+const token = isAuthenticated() && isAuthenticated().token;
+console.log("USER TOKEN", token);
+
+const Paymentb = ({ products, setReload = (f) => f, reload = undefined }) => {
   const [info, setInfo] = useState({
     loading: false,
     success: false,
-    clientToken: "",
+    clientToken: null,
     error: "",
+    instance: {},
   });
-
-  const userId = isAuthenticated() && isAuthenticated().user._id;
-  const token = isAuthenticated() && isAuthenticated().token;
-  console.log("USER TOKEN", token);
 
   const getToken = (userId, token) => {
     getmeToken(userId, token).then((info) => {
-      console.log("INFORMATION", info);
+      // console.log("INFORMATION", info);
       if (info.error) {
         setInfo({ ...info, error: info.error });
       } else {
@@ -30,13 +31,63 @@ const Paymentb = ({ product, setReload = (f) => f, reload = undefined }) => {
     });
   };
 
+  const showbtdropIn = () => {
+    return (
+      <div>
+        {info.clientToken !== null && (
+          <div>
+            <DropIn
+              options={{ authorization: info.clientToken }}
+              onInstance={(instance) => (info.instance = instance)}
+            />
+            <button className="btn btn-block btn-success" onClick={onPurchase}>
+              Buy
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   useEffect(() => {
     getToken(userId, token);
   }, []);
 
+  const onPurchase = () => {
+    setInfo({ loading: true });
+    let nonce;
+    let getNonce = info.instance.requestPaymentMethod().then((data) => {
+      nonce = data.nonce;
+      const paymentData = {
+        paymentMethodNonce: nonce,
+        amount: getAmount(),
+      };
+      processPayment(userId, token, paymentData)
+        .then((response) => {
+          setInfo({
+            ...info,
+            success: response.success,
+            loading: false,
+          });
+        })
+        .catch((error) => {
+          setInfo({ loading: false, sucess: false });
+        });
+    });
+  };
+
+  const getAmount = () => {
+    let amount = 0;
+    products.map((product, i) => {
+      amount = amount + product.price;
+    });
+    return amount;
+  };
+
   return (
     <div>
-      <h3>Test bt</h3>
+      <h3>Your Bill is ${getAmount()}</h3>
+      {showbtdropIn()}
     </div>
   );
 };
