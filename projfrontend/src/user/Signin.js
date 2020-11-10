@@ -78,7 +78,7 @@ const Signin = () => {
             style={{ display: error ? "" : "none" }}
           >
             {error}
-            <Link to="/signin">Login Here</Link>
+            <Link to="/signup">Login Here</Link>
           </div>
         </div>
       </div>

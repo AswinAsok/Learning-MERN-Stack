@@ -4,14 +4,16 @@ var jwt = require("jsonwebtoken");
 var expressJwt = require("express-jwt");
 
 exports.signup = (req, res) => {
-  const errors = validationResult(req);
+  const errors = validationResult(req); // Checking if there is any error in the validation check
 
+  //Return the error message to the frontEnd with a status code of 422 if there is any error.
   if (!errors.isEmpty()) {
     return res.status(422).json({
       error: errors.array()[0].msg,
     });
   }
 
+  //if there is no error creating a new user with the predefined user model.
   const user = new User(req.body);
   user.save((err, user) => {
     if (err) {

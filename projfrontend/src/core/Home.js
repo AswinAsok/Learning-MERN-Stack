@@ -25,9 +25,9 @@ function Home() {
 
   return (
     <Base title="Home Page" description="Welcome to the T-Shirt Store">
-      <div className="row text-center">
-        <h1 className="text-white">All of Tshirts</h1>
-        <div className="row">
+      <div className="row">
+        <h1 className="text-white">Lastest Products</h1>
+        <div className="row m-auto offset-3">
           {products.map((product, index) => {
             return (
               <div key={index} className="col-4 mb-4">
