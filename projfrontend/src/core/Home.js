@@ -37,7 +37,7 @@ function Home() {
         </div>
       </div>
       <div>
-        {getProducts.length === 0 ? (
+        {products.length === 0 ? (
           <h3 className="text-center">
             Due to Heavy Demand No Product Are Available Now
             <br />

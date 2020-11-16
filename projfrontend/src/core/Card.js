@@ -7,7 +7,7 @@ const Card = ({
   product,
   addToCart = true,
   removeFromCart = false,
-  setReload = f => f,
+  setReload = (f) => f,
   //function(f)(return f)
   reload = undefined,
 }) => {
@@ -47,7 +47,7 @@ const Card = ({
         <button
           onClick={() => {
             removeItemFromCart(product._id);
-            setReload(!reload)
+            setReload(!reload);
           }}
           className="btn btn-block btn-outline-success mt-2 mb-2"
         >
